@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Teacher>
+@{
+    Layout = "_Layout";
+    var title = "Read Teacher";
+    ViewData["Title"] = title;
+}
+
+<h2>@title</h2>
+
+<h3><a asp-action="Create" class="btn btn-sm btn-secondary m-2">Create</a></h3>
+<table class="table table-bordered table-sm table-striped m-2 p-1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Skills</th>
+            <th>Total Students</th>
+            <th>Salary</th>
+            <th>Added On</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="7" class="text-center">No Data Found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.Name</td>
+        <td>@item.Skills</td>
+        <td>@item.TotalStudents</td>
+        <td>@item.Salary</td>
+        <td>@item.AddedOn</td>
+        <td><a asp-action="Edit" asp-route-id="@item.Id">Update</a></td>
+        <td>
+            <form asp-action="Delete" method="post" asp-route-id="@item.Id">
+                <button>Delete</button>
+            </form>
+        </td>
+    </tr>
+            }
+        }
+    </tbody>
+</table>
+
